@@ -12,7 +12,8 @@ const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
       const { name } = req.body;
-      const uploadDir = path.join(process.cwd(), 'src', 'uploads', 'rent', name);
+   
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'rent', name);
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
@@ -20,13 +21,12 @@ const upload = multer({
     },
     filename: (req, file, cb) => {
       const { name } = req.body;
-      const originalExt = path.extname(file.originalname);
-      const filename = `${name}Image${originalExt}`; 
+      const originalExt = path.extname(file.originalname); 
+      const filename = `${name}Image${originalExt}`;
       cb(null, filename);
     },
   }),
 });
-
 
 const uploadMiddleware = upload.single('image');
 
@@ -40,6 +40,7 @@ export default function handler(req, res) {
       }
 
       const { name, cep, logradouro, bairro, cidade, estado } = req.body;
+      const file = req.file; 
       const jsonData = {
         name,
         cep,
@@ -47,10 +48,10 @@ export default function handler(req, res) {
         bairro,
         cidade,
         estado,
-        imageUrl: `/src/uploads/rent/${name}/image.jpg`
+        imageUrl: `/uploads/rent/${name}/${file.filename}` 
       };
 
-      const uploadDir = path.join(process.cwd(), 'src', 'uploads', 'rent', name);
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'rent', name);
       fs.writeFileSync(path.join(uploadDir, `${name}.json`), JSON.stringify(jsonData));
 
       res.status(200).json({ message: 'File uploaded and JSON saved successfully in rent folder.' });

@@ -1,16 +1,21 @@
 import { useState } from 'react';
 
 const CreateRentProperty = ({ isVisible, onClose }) => {
-    
+
   const [name, setName] = useState('');
   const [image, setImage] = useState(null);
   const [cep, setCep] = useState('');
   const [address, setAddress] = useState({});
 
+  const formatName = (name) => {
+    return name.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formattedName = formatName(name); 
     const formData = new FormData();
-    formData.append('name', name);
+    formData.append('name', formattedName);
     formData.append('image', image);
     formData.append('cep', cep);
     formData.append('logradouro', address.logradouro || '');
@@ -51,17 +56,18 @@ const CreateRentProperty = ({ isVisible, onClose }) => {
       <div className="modal">
         <button className="closeButton" onClick={onClose}>X</button>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label >
             Nome da Propriedade:
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </label>
-          <label>
-            Foto:
+          <label >
+            <span className='labelModalCreate'>Foto:</span>
+         
             <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
           </label>
-          <label>
-            CEP:
-            <input type="text" value={cep} onChange={handleCepChange} />
+          <label >
+          <span className='labelModalCreate'> CEP:</span>
+            <input type="text" value={cep} onChange={handleCepChange} required/>
           </label>
           <label>
             Rua:
@@ -79,7 +85,7 @@ const CreateRentProperty = ({ isVisible, onClose }) => {
             Estado:
             <input type="text" value={address.uf || ''} readOnly />
           </label>
-          <button type="submit" className="button">Criar Propriedade</button>
+          <button type="submit" className="buttonAdmin" style={{padding : "0.5rem", marginTop : "1rem"}}>Criar Propriedade</button>
         </form>
       </div>
     </div>

@@ -95,10 +95,14 @@ label {
   margin-bottom: 10px;
 }
 
+.labelModalCreate{
+ width: 1rem;
+ 
+}
 input {
-  width: 100%;
+  width: 75%;
   padding: 8px;
-  margin-top: 5px;
+  margin-top: 1rem;
 }
 
 .buttonModal{

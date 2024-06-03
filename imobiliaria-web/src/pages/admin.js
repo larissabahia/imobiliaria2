@@ -3,14 +3,23 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 
 export default function Admin() {
-
-    const properties = [
-        { id: 1, name: "Casa Azul", location: "São Paulo, SP", imgUrl: "/path/to/image1.jpg" },
-        { id: 2, name: "Apartamento Verde", location: "Rio de Janeiro, RJ", imgUrl: "/path/to/image2.jpg" },
-    ];
-
     const [isModalVisible, setModalVisible] = useState(false);
+    const [rentProperties, setRentProperties] = useState([]);
 
+    useEffect(() => {
+      const fetchProperties = async () => {
+        const res = await fetch('/api/readrent');
+        const data = await res.json();
+        setRentProperties(data);
+      };
+  
+      fetchProperties();
+    }, []);
+
+ 
+ useEffect(() => {
+    console.log(rentProperties)
+ })
 
     return (
         <>
@@ -43,10 +52,10 @@ export default function Admin() {
                         </tr>
                     </thead>
                     <tbody>
-                        {properties.map(property => (
+                        {rentProperties.map(property => (
                             <tr key={property.id}>
                                 <td>{property.name}</td>
-                                <td>{property.location}</td>
+                                <td><a href={property.googleMapsUrl} target="_blank">{property.location}</a></td>
                                 <td><img src={property.imgUrl} alt={`Imagem de ${property.name}`} style={{ width: '100px' }} /></td>
                                 <td>
                                     <button className="buttonAdmin">Editar</button>
@@ -58,8 +67,7 @@ export default function Admin() {
                 </table>
             </div>
 
-            <a href="https://www.google.com/maps/place/Liberdade,+São+Paulo,+SP" target="_blank">Ver Liberdade no Google Maps</a>
-
+            <img src='/src/uploads/rent/teste-com-espaco/image.jpg'  alt={`Imagem de`} style={{ width: '100px' }} />
         </>
     );
 }
