@@ -91,7 +91,7 @@ th {
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
-
+/* CREATE PROPERTY MODAL */
 
 .backdrop {
   position: fixed;
@@ -119,11 +119,13 @@ th {
   position: absolute;
   top: 10px;
   right: 10px;
-  border: none;
-  background: none;
   cursor: pointer;
   font-size: 24px;
-  color: #333;
+  color: black;
+  background-color: rgb(250, 250, 250);
+  border-radius: 100%;
+  border: solid 0.1rem;
+  border-color: black;
 }
 
 label {
@@ -147,5 +149,6 @@ input {
   margin-top: 5px;
 
 }
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 
