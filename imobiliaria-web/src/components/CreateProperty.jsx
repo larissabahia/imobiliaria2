@@ -6,14 +6,25 @@ const CreateProperty = ({ isVisible, onClose }) => {
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, location, image });
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('location', location);
+    formData.append('image', image);
+  
+    const response = await fetch('/api/createrent', {
+      method: 'POST',
+      body: formData,
+    });
+  
+    const result = await response.json();
+    console.log(result);
     onClose();
   };
+  
+  
 
-  
-  
   if (!isVisible) return null;
 
   return (

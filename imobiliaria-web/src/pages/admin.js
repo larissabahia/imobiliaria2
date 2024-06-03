@@ -7,7 +7,6 @@ export default function Admin() {
   const properties = [
     { id: 1, name: "Casa Azul", location: "São Paulo, SP", imgUrl: "/path/to/image1.jpg" },
     { id: 2, name: "Apartamento Verde", location: "Rio de Janeiro, RJ", imgUrl: "/path/to/image2.jpg" },
-    // Adicione mais propriedades conforme necessário
   ];
 
   const [isModalVisible, setModalVisible] = useState(false);
