@@ -1,29 +1,48 @@
 import { useState } from 'react';
 
-
-const CreateProperty = ({ isVisible, onClose }) => {
+const CreateRentProperty = ({ isVisible, onClose }) => {
+    
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
+  const [cep, setCep] = useState('');
+  const [address, setAddress] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('location', location);
     formData.append('image', image);
-  
+    formData.append('cep', cep);
+    formData.append('logradouro', address.logradouro || '');
+    formData.append('bairro', address.bairro || '');
+    formData.append('cidade', address.localidade || '');
+    formData.append('estado', address.uf || '');
+
     const response = await fetch('/api/createrent', {
       method: 'POST',
       body: formData,
     });
-  
+
     const result = await response.json();
     console.log(result);
     onClose();
   };
-  
-  
+
+  const handleCepChange = async (event) => {
+    const newCep = event.target.value;
+    setCep(newCep);
+    if (newCep.length === 8) {
+      const response = await fetch(`https://viacep.com.br/ws/${newCep}/json/`);
+      const data = await response.json();
+      if (!data.erro) {
+        setAddress(data);
+      } else {
+        setAddress({});
+      }
+    } else {
+      setAddress({});
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -33,22 +52,38 @@ const CreateProperty = ({ isVisible, onClose }) => {
         <button className="closeButton" onClick={onClose}>X</button>
         <form onSubmit={handleSubmit}>
           <label>
-            Casa:
+            Nome da Propriedade:
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-          </label>
-          <label>
-            Localização:
-            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
           </label>
           <label>
             Foto:
             <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
           </label>
-          <button type="submit" className="button">Criar Casa</button>
+          <label>
+            CEP:
+            <input type="text" value={cep} onChange={handleCepChange} />
+          </label>
+          <label>
+            Rua:
+            <input type="text" value={address.logradouro || ''} readOnly />
+          </label>
+          <label>
+            Bairro:
+            <input type="text" value={address.bairro || ''} readOnly />
+          </label>
+          <label>
+            Cidade:
+            <input type="text" value={address.localidade || ''} readOnly />
+          </label>
+          <label>
+            Estado:
+            <input type="text" value={address.uf || ''} readOnly />
+          </label>
+          <button type="submit" className="button">Criar Propriedade</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default CreateProperty;
+export default CreateRentProperty;

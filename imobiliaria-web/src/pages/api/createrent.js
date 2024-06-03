@@ -19,11 +19,14 @@ const upload = multer({
       cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-      const { location } = req.body;
-      cb(null, `${location}.jpg`);
+      const { name } = req.body;
+      const originalExt = path.extname(file.originalname);
+      const filename = `${name}Image${originalExt}`; 
+      cb(null, filename);
     },
   }),
 });
+
 
 const uploadMiddleware = upload.single('image');
 
@@ -36,14 +39,19 @@ export default function handler(req, res) {
         return res.status(500).json({ error: err.message });
       }
 
-      const { name, location } = req.body;
+      const { name, cep, logradouro, bairro, cidade, estado } = req.body;
       const jsonData = {
         name,
-        location,
-        imageUrl: `/src/uploads/rent/${name}/${location}.jpg`
+        cep,
+        logradouro,
+        bairro,
+        cidade,
+        estado,
+        imageUrl: `/src/uploads/rent/${name}/image.jpg`
       };
+
       const uploadDir = path.join(process.cwd(), 'src', 'uploads', 'rent', name);
-      fs.writeFileSync(path.join(uploadDir, `${location}.json`), JSON.stringify(jsonData));
+      fs.writeFileSync(path.join(uploadDir, `${name}.json`), JSON.stringify(jsonData));
 
       res.status(200).json({ message: 'File uploaded and JSON saved successfully in rent folder.' });
     });
@@ -52,3 +60,4 @@ export default function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+
