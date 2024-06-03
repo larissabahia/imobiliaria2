@@ -1,3 +1,27 @@
+/* HEADER */
+.header {
+  background-color: #05182b; 
+  padding: 10px 20px; 
+  display: flex;
+  justify-content: flex-end; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  border-radius: 0.3rem;
+  margin-bottom: 3rem;
+}
+
+.logout {
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #dc3545; 
+  color: white; 
+  border-radius: 5px; 
+  font-weight: bold; 
+}
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+/* Content */
+
+
 .container {
   max-width: 800px;
   margin: 20px auto;
@@ -19,7 +43,10 @@ h1 {
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
+  align-items: center;
+  justify-content: center; 
+
 }
 
 th {
@@ -27,9 +54,18 @@ th {
 }
 
 .buttonAdmin {
-  padding: 5px 10px;
+  padding: 0.8rem 1.2rem;
   color: white;
   background-color: #0070f3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttonAdminDelete {
+  padding: 0.8rem 1.2rem;
+  color: white;
+  background-color: red;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -54,8 +90,8 @@ th {
 }
 
 
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-/*  xxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxxxxxxxxx*/
 
 .backdrop {
   position: fixed;
@@ -97,7 +133,7 @@ label {
 
 .labelModalCreate{
  width: 1rem;
- 
+
 }
 input {
   width: 75%;

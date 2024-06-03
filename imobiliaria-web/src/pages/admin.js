@@ -1,4 +1,5 @@
-import CreateRentProperty from '@/components/CreateProperty';
+import CreateRentProperty from '@/components/CreateRentProperty';
+import Header from '@/components/Header';
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 
@@ -20,16 +21,26 @@ export default function Admin() {
 
     //Delete rent
     function deleteProperty(name) {
-        fetch(`/api/deleterent?name=${encodeURIComponent(name)}`, {
-            method: 'DELETE'
-        })
+        if (confirm(`Tem certeza que deseja deletar o imóvel ${formatName(name)}?`)) {
+            fetch(`/api/deleterent?name=${encodeURIComponent(name)}`, {
+                method: 'DELETE'
+            })
             .then(response => response.json())
             .then(data => {
-                //console.log(data.message);
+               
                 setUpdatedStatus(prevStatus => prevStatus + 1);
+                alert("Imóvel deletada com sucesso!");
             })
-            .catch(error => console.error('Error deleting property:', error));
+            .catch(error => {
+                console.error('Error deleting property:', error);
+               
+                alert("Erro ao deletar o imóvel.");
+            });
+        } else {
+            console.log("Deleção cancelada pelo usuário.");
+        }
     }
+    
 
     function formatName(name) {
         return name.replace(/-/g, ' ');
@@ -44,20 +55,22 @@ export default function Admin() {
     return (
         <>
             <Head>
-                <title>Administração de venda e aluguéis de propriedades</title>
+                <title>Administração de venda e aluguéis de imóveis</title>
                 <meta name="description" content="Administrar propriedades" />
             </Head>
 
-            <h1>Administração de venda e aluguéis de propriedades</h1>
+        <Header/>
+
+            <h1 style={{ marginBottom : "3rem"}}>Administração de venda e aluguéis de imóveis</h1>
 
             <div className="container">
-                <h1>Propriedades para alugar</h1>
+                <h1>Imóveis para alugar</h1>
 
                 <div className="createSection" style={{ marginTop: "3rem" }}>
                     <button onClick={() => setModalVisible(true)}
                         className="buttonAdmin"
                         style={{ padding: "1rem", fontSize: "1rem" }}>
-                        Adicionar nova propriedade</button>
+                        Adicionar novo imóvel</button>
                 </div>
 
                 <CreateRentProperty isVisible={isModalVisible} onClose={() => setModalVisible(false)} />
@@ -79,7 +92,7 @@ export default function Admin() {
                                 <td><img src={property.imgUrl} alt={`Imagem de ${property.name}`} style={{ width: '100px' }} /></td>
                                 <td>
                                     <button className="buttonAdmin">Editar</button>
-                                    <button className="buttonAdmin"
+                                    <button className="buttonAdminDelete"
                                         style={{ marginLeft: '10px' }}
                                         onClick={() => deleteProperty(property.name)}>
                                         Deletar</button>
