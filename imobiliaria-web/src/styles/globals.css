@@ -89,16 +89,15 @@ th {
   color: #333;
 }
 
-
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
-/* CREATE PROPERTY MODAL */
 
+/* CREATE PROPERTY MODAL */
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -109,45 +108,98 @@ th {
 .modal {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 600px;
+  z-index: 1001;
 }
 
 .closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  float: right;
+  margin-top: -0.8rem;
+  margin-right: -0.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
-  font-size: 24px;
   color: black;
   background-color: rgb(250, 250, 250);
   border-radius: 100%;
-  border: solid 0.1rem;
-  border-color: black;
+  border: solid 0.1rem black;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
+.labelCreateRentName, .labelCreateRent {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem; 
 }
 
-.labelModalCreate{
- width: 1rem;
-
-}
-input {
-  width: 75%;
-  padding: 8px;
-  margin-top: 1rem;
+.labelCreateRentName {
+  margin-top: 2rem;
 }
 
-.buttonModal{
+.labelCreateRent input, .labelCreateRentName input {
+  margin-top: 0.2rem;
+  padding: 0.5rem;
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
+.labelCreateRent input[readonly], .labelCreateRentName input[readonly] {
+  background-color: #f3f3f3;
+}
+
+.labelCreateRent input[type="text"], .labelCreateRentName input[type="text"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.labelCreateRent input[type="file"] {
+  display: none;
+}
+
+.btn-file {
+  background-color: #0070f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.file-name {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; 
+  width: 100%; 
+}
+
+.buttonCreateRent {
+
+  padding: 2rem;
+  color: white;
+  background-color: #0070f3;
+  border-radius: 5px;
+  border: none;
+  width: 15rem;
+  height: 3rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: block;
+  font-size: 1.2rem; 
 }
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
