@@ -1,0 +1,154 @@
+/* HEADER */
+.header {
+  background-color: #05182b; 
+  padding: 10px 20px; 
+  display: flex;
+  justify-content: flex-end; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  border-radius: 0.3rem;
+  margin-bottom: 3rem;
+}
+
+.logout {
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #dc3545; 
+  color: white; 
+  border-radius: 5px; 
+  font-weight: bold; 
+}
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+/* Content */
+
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  align-items: center;
+  justify-content: center; 
+
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.buttonAdmin {
+  padding: 0.8rem 1.2rem;
+  color: white;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttonAdminDelete {
+  padding: 0.8rem 1.2rem;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttonAdmin:hover {
+  background-color: #0056b3;
+}
+
+
+
+.createSection {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createSection span {
+  font-size: 18px;
+  color: #333;
+}
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* CREATE PROPERTY MODAL */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: black;
+  background-color: rgb(250, 250, 250);
+  border-radius: 100%;
+  border: solid 0.1rem;
+  border-color: black;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.labelModalCreate{
+ width: 1rem;
+
+}
+input {
+  width: 75%;
+  padding: 8px;
+  margin-top: 1rem;
+}
+
+.buttonModal{
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+
+}
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
